@@ -8,3 +8,4 @@ services:
       expose:
         # expose the opencloud server
         - 9200
+      ports:
