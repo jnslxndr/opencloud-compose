@@ -5,6 +5,6 @@ services:
       environment:
         # bind to all interfaces
         PROXY_HTTP_ADDR: "0.0.0.0:9200"
-      ports:
-        # expose the opencloud server on all interfaces
-        - "0.0.0.0:9200:9200"
+      expose:
+        # expose the opencloud server
+        - 9200
