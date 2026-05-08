@@ -1,7 +1,8 @@
 ---
 services:
   opencloud:
-    image: ${OC_DOCKER_IMAGE:-opencloudeu/opencloud-rolling}:${OC_DOCKER_TAG:-latest}
+    # renovate: depName=opencloudeu/opencloud-rolling
+    image: ${OC_DOCKER_IMAGE:-opencloudeu/opencloud-rolling}:${OC_DOCKER_TAG:-6.1.0}
     # changelog: https://github.com/opencloud-eu/opencloud/tree/main/changelog
     # release notes: https://docs.opencloud.eu/opencloud_release_notes.html
     user: ${OC_CONTAINER_UID_GID:-1000:1000}
@@ -46,13 +47,15 @@ services:
       OC_PASSWORD_POLICY_BANNED_PASSWORDS_LIST: banned-password-list.txt
       # control the password enforcement and policy for public shares
       OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD: "${OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD:-true}"
-      OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD: "${OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD:-true}"
+      OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD: "${OC_SHARING_PUBLIC_WRITEABLE_SHARE_MUST_HAVE_PASSWORD:-false}"
       OC_PASSWORD_POLICY_DISABLED: "${OC_PASSWORD_POLICY_DISABLED:-false}"
       OC_PASSWORD_POLICY_MIN_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_CHARACTERS:-8}"
       OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_LOWERCASE_CHARACTERS:-1}"
       OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS:-1}"
       OC_PASSWORD_POLICY_MIN_DIGITS: "${OC_PASSWORD_POLICY_MIN_DIGITS:-1}"
       OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS:-1}"
+      # default language for services/WebUI; defaults to English, language code (ISO 639-1, e.g. de, en, fr)
+      OC_DEFAULT_LANGUAGE: ${DEFAULT_LANGUAGE}
     volumes:
       - ./config/opencloud/csp.yaml:/etc/opencloud/csp.yaml
       - ./config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt
