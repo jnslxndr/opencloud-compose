@@ -1,6 +1,20 @@
 # This adds four additional routes to the proxy. Forwarding
 # request on '/carddav/', '/caldav/' and the respective '/.well-knwown'
 # endpoints to the radicale container and setting the required headers.
+role_assignment:
+  driver: oidc
+  oidc_role_mapper:
+    role_claim: groups
+    role_mapping:
+      - role_name: admin
+        claim_value: opencloudAdmin
+      - role_name: spaceadmin
+        claim_value: opencloudSpaceAdmin
+      - role_name: user
+        claim_value: opencloudUser
+      - role_name: guest
+        claim_value: opencloudGuest
+
 additional_policies:
   - name: default
     routes:
